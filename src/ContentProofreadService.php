@@ -37,13 +37,18 @@ class ContentProofreadService extends SharpApiClient
                 'sharpapi-content-proofread.api_job_status_polling_wait',
                 180)
         );
+        $this->setUseCustomInterval(
+            (bool) config(
+                'sharpapi-content-proofread.api_job_status_use_polling_interval',
+                false)
+        );
         $this->setUserAgent('SharpAPILaravelContentProofread/1.0.0');
     }
 
     /**
      * Proofreads (and checks grammar) of the provided text.
      *
-     * @param string $text The text to proofread
+     * @param  string  $text  The text to proofread
      * @return string The proofread text or an error message
      *
      * @throws GuzzleException
